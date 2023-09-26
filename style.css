@@ -8,13 +8,16 @@
 
 }
 
-.title_container,.option_container{
+.title_container,.option_container,.result_container{
     display: flex;
     justify-content: center;
 
     padding: 50px 0;
 }
 
+.result_container{
+    padding: 25px 0;
+}
 .title,.option,.player,.computer{
     width: 1000px;
 
@@ -23,20 +26,33 @@
 }
 
 .player,.computer{
-    height: 350px;
+    height: 300px;
     flex-direction: column;
     align-items: center;
 
 }
 
 .option_block{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 3px solid gray;
     border-radius: 10px;
+    transition: all 1s ease;
+}
+
+.win,.lose{
+    transform: scale(1.1);
+}
+
+.win{
+    border-color: green;
+}
+
+.lose{
+    border-color: red;
 }
 
 

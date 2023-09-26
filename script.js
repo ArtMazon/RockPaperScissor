@@ -2,6 +2,7 @@
 
 
 
+
 function game() {
     let i = 0;
     let playerScore = 0;
@@ -139,3 +140,86 @@ function getComputerChoice() {
 
     
 }
+
+function playRoundUI(e) {
+
+    if(!e.target.id){
+        return;
+    }
+
+    const id = e.target.id;
+
+    console.log(e.target.id);
+
+    const playerChoice = playerOptionController(id);
+
+    console.log(playerChoice);
+
+    const computerChoice = getComputerChoice();
+
+    const roundResult =playRound(playerChoice,computerChoice);
+
+
+    const resultUI = document.querySelector(".result");
+
+    resultUI.textContent = roundResult;
+
+
+
+    const playerOption = document.querySelector(`#${e.target.id}`)
+    console.log(e.target.classList[0]);
+    console.log(playerOption);
+   
+
+
+    playerOption.classList.add("win");
+
+    
+}
+
+function removeTransition(e) {
+    
+    
+    if(e.propertyName !== 'transform') return ;
+    this.classList.remove('win');
+
+    
+}
+
+function playerOptionController(id) {
+
+    switch (id) {
+        case "player_rock":
+            return "rock";
+        
+        case "player_scissor":
+            return "scissor";
+        
+        case "player_paper":
+            return "paper"
+    
+        default:
+            return "invalid";
+            
+    }
+    
+}
+
+
+
+const optionBlockList = document.querySelectorAll(".option_block");
+
+function removeTransition(e) {
+
+    if(e.propertyName !== 'transform') return ;
+
+    this.classList.remove('win');
+    
+  }
+
+
+optionBlockList.forEach(optionBlock => optionBlock.addEventListener('transitionend',removeTransition));  
+
+
+
+window.addEventListener("click",playRoundUI);
