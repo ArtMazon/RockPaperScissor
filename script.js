@@ -159,12 +159,9 @@ function playRoundUI(e) {
 
     const roundResult =playRound(playerChoice,computerChoice);
 
-
     const resultUI = document.querySelector(".result");
 
-    resultUI.textContent = roundResult;
-
-
+    resultUI.textContent = `You ${roundResult} `
 
     const playerOption = document.querySelector(`#${e.target.id}`)
     console.log(e.target.classList[0]);
@@ -172,19 +169,31 @@ function playRoundUI(e) {
    
 
 
-    playerOption.classList.add("win");
+    playerOption.classList.add(roundResult.toLocaleLowerCase());
 
+    const computerChoiceUI= document.querySelector(`#${computerOtpionController(computerChoice)}`);
+
+    console.log(computerChoiceUI);
+    switch (roundResult) {
+        case "Win":
+            computerChoiceUI.classList.add("lose");
+            break;
+
+        case "Lose":
+            computerChoiceUI.classList.add("win");  
+            
+        case "Draw":
+            computerChoiceUI.classList.add("draw");    
     
+        default:
+
+            
+            break;
+    }
+
+    console.log(e.target.classList[1]);
 }
 
-function removeTransition(e) {
-    
-    
-    if(e.propertyName !== 'transform') return ;
-    this.classList.remove('win');
-
-    
-}
 
 function playerOptionController(id) {
 
@@ -205,6 +214,25 @@ function playerOptionController(id) {
     
 }
 
+function computerOtpionController(option) {
+
+    switch (option) {
+        case "rock":
+            return "computer_rock";
+            
+    
+        case "paper":
+            return "computer_paper";
+            
+        case "scissor":
+            return "computer_scissor";
+
+        default:
+            break;
+    }
+    
+}
+
 
 
 const optionBlockList = document.querySelectorAll(".option_block");
@@ -213,7 +241,17 @@ function removeTransition(e) {
 
     if(e.propertyName !== 'transform') return ;
 
-    this.classList.remove('win');
+    if(this.classList.contains("win")){
+        this.classList.remove("win")
+    }   
+
+    if(this.classList.contains("draw")){
+        this.classList.remove("draw")
+    }  
+
+    if(this.classList.contains("lose")){
+        this.classList.remove("lose")
+    }  
     
   }
 
